@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>sonore</title>
+</head>
+<body>
+<script type="text/javascript">
+  let callbackDone = () => {
+  };
+  let verovioLoaded = false;
+  
+  // check WebAssembly Support
+  const wasmSupported = (() => {
+    try {
+      if (typeof WebAssembly === "object"
+        && typeof WebAssembly.instantiate === "function") {
+        const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+        // this is very hacky (value was taken from wasm-module)
+        const memory = new WebAssembly.Memory({"initial": 8192});
+        if (module instanceof WebAssembly.Module)
+          return true;
+      }
+    } catch (e) {
+    }
+    return false;
+  })();
+  
+  console.log(wasmSupported ? "WebAssembly is supported" : "WebAssembly is not supported");
+  
+  // Preload the WASM module (WASM: Web Assembly Module)
+  if (wasmSupported) {
+    var Module = {
+      noInitialRun: false,
+      onRuntimeInitialized: function () {
+        vrvToolkit = new verovio.toolkit();
+        console.log("Verovio with WebAssembly-Support loaded. Verovio Version: " + vrvToolkit.getVersion());
+        verovioLoaded = true;
+        callbackDone();
+      }
+    };
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "verovio.wasm", true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function () {
+      Module.wasmBinary = xhr.response;
+      const script = document.createElement("script");
+      script.src = "verovio-toolkit-wasm.js";
+      document.body.appendChild(script);
+    };
+    xhr.send(null);
+  } else {
+    // just skip here and wait for verovio-loading in Rendering Service
+    vrvToolkit = null;
+    verovioLoaded = true;
+    callbackDone();
+  }
+  
+  // call this function from main.ts to check if Vue-init can start
+  function registerCallbackVerovioLoaded(callback) {
+    if (verovioLoaded) {
+      callback();
+    } else {
+      callbackDone = callback;
+    }
+  }
+</script>
+<noscript>
+  <strong>We're sorry but sonore doesn't work properly without JavaScript enabled. Please enable it to
+    continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+</html>

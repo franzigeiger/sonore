@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+  <g style="fill:none;stroke:#000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25;stroke-dasharray:none">
+    <path d="m 0,52 200,0"/>
+    <path d="m 0,76 200,0"/>
+    <path d="m 0,100 200,0"/>
+    <path d="m 0,124 200,0"/>
+    <path d="m 0,148 200,0"/>
+  </g>
+  <path d="m 87.9,148 -2,0 0,-81 c 0,-4.1 2.4,-7.1 5,-10 4.2,-3.5 8.8,-4.7 14,-4.7 6.4,0 10,4.1 10,8.3 -0.3,8.6 -12.3,16 -19.6,15.7 -2.7,-0.1 -6.1,-1.5 -7.4,-2 z" style="fill:#000;fill-opacity:1;stroke:none"/>
+  <path style="fill:none;stroke:#000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" d="m 86,35.5 28,0"/>
+</svg>

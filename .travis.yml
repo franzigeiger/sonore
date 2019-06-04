@@ -1,0 +1,14 @@
+dist: trusty
+language: node_js
+cache:
+  directories:
+  - "$HOME/.npm"
+  - "$HOME/.cache"
+node_js:
+  - "stable"
+install:
+  - npm ci
+script:
+  - npm run lint-travis
+  - npm run test:unit
+#  - npm run test:e2e-travis
